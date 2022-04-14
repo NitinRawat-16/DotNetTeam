@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DataModelLayer.DeliveryOrderData_Result>
+@{
+    ViewBag.Title = "OrderDelivery";
+    Layout = "~/Views/Admins/_LayoutAdmin.cshtml";
+}
+
+
+
+<h2>Order Delivery</h2>
+
+
+<div>
+    <table id="OrderDelivery" class="table table-bordered table-hover">
+        <thead>
+
+            <tr>
+                <th>Order Id</th>
+                <th>Customer Name</th>
+                <th>Customer Mobile</th>
+                <th>Delivery Address</th>
+                <th>Order Date</th>
+                <th>Payment Mode</th>
+                <th>Order Excpected Delivered</th>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th> Product Size</th>
+                <th>Button</th>
+            </tr>
+        </thead>
+        <tbody>
+           
+         
+
+            @foreach (var order in Model)
+            {
+               
+              <tr>
+            <td>@order.OrderId</td>
+            <td>@order.CustomerName</td>
+            <td>@order.CustomerMobile</td>
+            <td>@order.DeliveryAddress</td>
+            <td>@order.OrderDate.ToString("MM/dd/yyyy")</td>
+            <td>@order.PaymentMode</td>
+            <td>@order.OrderExcpectedDelivery.Value.ToString("MM/dd/yyyy")</td>
+            <td>@order.ProductId</td>
+            <td>@order.ProductName</td>
+            <td>@order.Size</td>
+            <td>
+                <a href="@Url.Action("OrderDeliveredConfirm", "Admins", order)">Delivered</a>
+            </td>
+
+        </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#OrderDelivery').DataTable();
+        });
+    </script>
+}
+
+

@@ -1,0 +1,38 @@
+﻿@model  DataModelLayer.OrderConfirmed
+@{
+    ViewBag.Title = "OrderCancel";
+    Layout = "~/Views/Admins/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <div class="row " style="padding:100px 2px 8px 2px">
+        <div class="col-md-offset-3 col-md-6 col " style="background-color: mintcream; border: 2px solid Black">
+            <h3 style="text-align:center">Order Cancel</h3>
+            @using (Html.BeginForm("OrderCancelEntry", "Admins"))
+            {
+                <div style="padding:20px 4px 6px 80px">
+                    @Html.LabelFor(o => o.CustomerName)
+                    @Html.TextBoxFor(o => o.CustomerName, new { @readonly = "readonly" })
+                    <br /><br />
+                    @Html.LabelFor(o => o.ProductId)
+                    @Html.TextBoxFor(o => o.ProductId, new { @readonly = "readonly" })
+                    <br /><br />
+                    @Html.LabelFor(o => o.OrderCancelReason)
+                    @Html.TextBoxFor(o => o.OrderCancelReason, new { @class= "form-control ",TextBoxMode = "MultiLine", Columns = "55px", Rows = "10px" })
+                    @Html.ValidationMessageFor(o=>o.OrderCancelReason)
+                </div>
+                @Html.HiddenFor(o => o.CustomerId)
+                @Html.HiddenFor(o => o.OrderConfirmedId)
+                @Html.HiddenFor(o=>o.CustomerAddress)
+                @Html.HiddenFor(o=>o.CustomerMobile)
+                @Html.HiddenFor(o=>o.PaymentMode)
+                @Html.HiddenFor(o=>o.OrderDate)
+                @Html.HiddenFor(o=>o.Size)
+
+                <button class="btn bg-primary" id="SubmitBtn" type="submit">Confirm</button>
+                <button class="btn bg-primary" id="SubmitBtn" type="reset">Clear</button>
+
+            }
+        </div>
+    </div>
+</div>

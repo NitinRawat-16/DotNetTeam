@@ -1,0 +1,65 @@
+﻿@model IEnumerable<DataModelLayer.OrderConfirmData_Result>
+@{
+    ViewBag.Title = "OrderConfirm";
+    Layout = "~/Views/Admins/_LayoutAdmin.cshtml";
+}
+
+<h2>Order Confirm Table </h2>
+<div>
+    <table id="orderTable" class="table table-bordered table-hover">
+        <thead>
+
+            <tr>
+                <th>id</th>
+                <th>Customer Name</th>
+                <th>Customer Mobile</th>
+                <th>Custmer Address</th>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Product Type</th>
+                <th>Order Size</th>
+                <th>Available Quantity</th>
+                <th>Order Date</th>
+                <th>Button</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+            <tr>
+                <td>@order.OrderConfirmedId</td>
+                <td>@order.CustomerName</td>
+                <td>@order.CustomerMobile</td>
+                <td>@order.CustomerAddress</td>
+                <td>@order.ProductId</td>
+                <td>@order.ProductName</td>
+                <td>@order.ProductCategoryType</td>
+                <td>@order.Size</td>
+                <td>@order.Available</td>
+                <td>@order.OrderDate</td>
+                <td>
+                    <a href="@Url.Action("OrderConfirm", "Admins",order)">Conifrm</a>
+                    <a href="@Url.Action("OrderCancel", "Admins",order)">Cancel</a>
+                </td>
+
+            </tr>
+
+            }
+        </tbody>
+
+    </table>
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            $('#orderTable').DataTable()
+        });
+    </script>
+}
+
+
+
+
+

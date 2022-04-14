@@ -1,0 +1,52 @@
+﻿@model IEnumerable<DataModelLayer.AlertProductDetails_Result>
+@{
+    ViewBag.Title = "ProductAlert";
+    Layout = "~/Views/Admins/_LayoutAdmin.cshtml";
+}
+
+<h2>ProductAlert</h2>
+<div>
+    <table id="productTable" class="table table-bordered table-hover">
+        <thead>
+
+            <tr>
+                <th>Product Code</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Size</th>
+                <th>Number Available</th>
+                <th>Total Product Added</th>
+                <th>Notification Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.ProductName</td>
+                <td>@product.ProductCategoryType</td>
+                <td>@product.ProductPrice</td>
+                <td>@product.SIZE</td>
+                <td>@product.NUM</td>
+                <td>@product.TotalProductAdded</td>
+                <td>@product.ProductAdminNotification</td>
+            </tr>
+
+            }
+        </tbody>
+
+    </table>
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#productTable').DataTable()
+        });
+    </script>
+}
+
+
+

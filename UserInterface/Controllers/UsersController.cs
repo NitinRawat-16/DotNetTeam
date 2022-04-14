@@ -1,0 +1,124 @@
+﻿using System.Web.Mvc;
+using System.Collections.Generic;
+using DataModelLayer;
+using BusinessLogicLayer.Users;
+using UserInterface.ViewModel;
+using System.Security.Claims;
+using System.Web;
+
+namespace UserInterface.Controllers
+{
+    [Authorize(Roles = "User")]
+    public class UsersController : Controller
+    {
+        private readonly UserBs _userBs;
+        public UsersController()
+        {
+            _userBs = new UserBs();
+        }
+        // GET: User
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult ShowProducts()
+        {
+            var products = new ViewProductsViewModel
+            {
+                Products = _userBs.ShowAllProducts()
+            };
+            return View(products);
+        }
+
+        public ActionResult Wishlist()
+        {
+            return View();
+        }
+
+        public ActionResult BuyNow(DeliveryAddressesViewModel deliveryAddressesViewModel)
+        {
+            deliveryAddressesViewModel.Carts=_userBs.GetCartItemsByUser(User.Identity.Name);
+            return View(deliveryAddressesViewModel);
+        }
+
+        public void AddToWishlist(){}
+
+        public ActionResult AddDeliveryAddress()
+        {
+            return View();
+        }
+
+        public ActionResult AddAddress(DeliveryAddress deliveryAddress)
+        {
+            var userName = User.Identity.Name;
+            _userBs.AddAddress(deliveryAddress, userName);
+            return RedirectToAction("BuyNow");
+        }
+
+        public ActionResult Orders()
+        {
+            var userName = User.Identity.Name;
+            OrderTableViewModel data = new OrderTableViewModel() {
+                ProductPending = _userBs.GetPendingOrder(userName),
+                ProductConfirm = _userBs.GetConfirmedOrder(userName),
+                ProductCancel = _userBs.GetcancelOrder(userName),
+                ProductSuccessDelivered = _userBs.GetDeliveredOrder(userName)
+        };
+
+            return View(data);
+        }
+
+        public ActionResult SelectAddress()
+        {
+            var user = User.Identity.Name;
+            var deliveryAddresses = _userBs.GetDeliveryAddresses(user);
+            var viewModel = new DeliveryAddressesViewModel
+            {
+                DeliveryAddress = deliveryAddresses,
+            };
+            return View(viewModel);
+        }
+
+        public ActionResult OrderConfirm(DeliveryAddressesViewModel deliveryAddressesViewModel)
+        {
+            var CurrentUser=User.Identity.Name;
+            var UserData=_userBs.GetUserById(CurrentUser);
+            var AddressData = _userBs.GetAddressById(deliveryAddressesViewModel.DeliveryAddressSelect);
+            var UserAddress = AddressData[1];
+            var UserMobile=AddressData[0];
+            var cartItem = _userBs.GetCartItemsByUser(CurrentUser);
+            List<OrderConfirmed> orderConfirmeds = new List<OrderConfirmed>();
+            foreach (var item in cartItem)
+            {
+                for(int i = 0; i < item.Quantity; i++)
+                {
+                    OrderConfirmed order = new OrderConfirmed()
+                    {
+                        ProductId = item.ProductId,
+                        CustomerId = UserData.Id,
+                        CustomerName=deliveryAddressesViewModel.Name,
+                        CustomerAddress=UserAddress,
+                        CustomerMobile=UserMobile,
+                        PaymentMode="Online",
+                        OrderStatus="Pending",
+                        OrderDate=System.DateTime.Now.Date,
+                        Size="L"
+                    };
+                    orderConfirmeds.Add(order);
+                }
+            }
+                _userBs.OrderConfirmedByList(orderConfirmeds);
+            _userBs.RemoveFromCart(CurrentUser);
+
+            HttpCookie count = new HttpCookie("Count", "0");
+            Response.Cookies.Add(count);
+
+            return RedirectToAction("Orders");
+
+
+        }
+
+
+    }
+}

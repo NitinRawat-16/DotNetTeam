@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DataModelLayer.Product>
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Admins/_LayoutAdmin.cshtml";
+}
+
+<h2>ProductList</h2>
+<hr />
+<p  style="float:right;">
+    @Html.ActionLink("AddProduct", "AddProduct", "Products",null,new {@class = "btn btn-primary"})
+</p>
+<br /> <br />
+<div>
+    <table id="productTable" class="table table-bordered table-hover">
+        <thead>
+
+            <tr>
+                <th>Product Code</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Product Added Date</th>
+                <th>Type</th>
+                <th>Availability</th>
+                <th>Total Count</th>
+                <th>Admin Notification</th>
+                <th>Price</th>
+                <th>S</th>
+                <th>M</th>
+                <th>L</th>
+                <th>XL</th>
+                <th>Edit</th>
+                <th>Quantity</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.ProductName</td>
+                <td>@product.ProductDescription</td>
+                <td>@product.ProductAddedDate.ToString("MMM/dd/yyyy")</td>
+                <td>@product.ProductCategory.ProductCategoryType</td>
+                <td>@product.ProductAvailability</td>
+                <td>@product.TotalProductAdded</td>
+                <td>@product.ProductAdminNotification</td>
+                <td>@product.ProductPrice</td>
+                <td>@product.ProductSize.S</td>
+                <td>@product.ProductSize.M</td>
+                <td>@product.ProductSize.L</td>
+                <td>@product.ProductSize.Xl</td>
+                <td>@Html.ActionLink("Edit", "Edit", "Products", new { id = product.ProductId }, null)</td>
+                <td>@Html.ActionLink("Add Quantity", "AddProductQuantity", "Products", new { id = product.ProductId }, null)</td>
+
+            </tr>
+
+            }
+        </tbody>
+
+    </table>
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#productTable').DataTable()
+        });
+    </script>
+}
+
+
+
+

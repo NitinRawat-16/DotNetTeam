@@ -1,0 +1,114 @@
+﻿@model  UserInterface.ViewModel.ViewProductsViewModel
+
+@{
+    ViewBag.Title = "ShowProducts";
+    Layout = "~/Views/Users/_Layout.cshtml";
+}
+<link href="~/Content/ProductSheet.css" rel="stylesheet" />
+<h2>Products</h2>
+<hr />
+
+<div class="filters">
+
+</div>
+
+@foreach (var items in Model.Products)
+{
+    <div class="box">
+
+        <div class="col-md-3 thumbnail display">
+            <img style="width:300px; height:300px;" src="@Url.Content(items.ProductImage)" class="img-rounded" alt="Waterfall" />
+
+
+            <div id="item">
+                <div class="caption Name">
+                    <h4> <span class="caption Name"> @items.ProductName </span></h4>
+                </div>
+
+                <div class="caption">
+                    <span>@items.ProductDescription </span>
+                </div>
+
+                <div class="caption">
+                    <span class="btn-danger">Rs. @items.ProductPrice/-</span>&nbsp;&nbsp;&nbsp;
+                    <label>size</label>
+                    <select name="" id="" class="">
+                        @if (@items.ProductSize.S == 0)
+                        {
+                            <option disabled>S</option>
+                        }
+                        else
+                        {
+
+                            <option value="S">S</option>
+                        }
+                        @if (@items.ProductSize.M == 0)
+                        {
+                            <option disabled>M</option>
+                        }
+                        else
+                        {
+
+                            <option value="M">M</option>
+                        }
+                        @if (@items.ProductSize.L == 0)
+                        {
+                            <option disabled>L</option>
+                        }
+                        else
+                        {
+
+                            <option value="L">L</option>
+                        }
+                        @if (@items.ProductSize.Xl == 0)
+                        {
+                            <option disabled>Xl</option>
+                        }
+                        else
+                        {
+
+                            <option value="Xl">Xl</option>
+                        }
+                    </select>
+
+                </div>
+            </div>
+            <div>
+                @if (items.ProductAvailability > 0)
+                {
+                    <a href="@Url.Action("BuyNow", "Users", items)" class="btn btn-lg btn-block btn-warning button">Buy Now</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("BuyNow", "Users", items)" class="btn btn-lg btn-block btn-warning disabled button">Buy Now</a>
+
+                }
+
+
+                @if (items.ProductAvailability > 0)
+                {
+                    <a href="@Url.Action("AddToCart", "Cart", items)"
+                       class="btn btn-lg btn-block button btn-orange">Add To Cart </a>
+                }
+                else
+                {
+                    <span class="btn btn-lg btn-block button btn-orange">Out Of Stock!</span>
+                }
+
+                <a href="@Url.Action("AddToWishlist", "Wishlist", items)" class="btn btn-lg btn-block button btn-warning">
+                    Wishlist <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                    </svg>
+                </a>
+                @*<a href="@Url.Action("AddToWishlist", "Wishlist", items)" id="wishlist" class="btn btn-lg btn-block btn-warning button"
+                       style="margin:50px; color:blue;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart">
+                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                        </svg>
+                    </a>*@
+            </div>
+        </div>
+    </div>
+}
+
+

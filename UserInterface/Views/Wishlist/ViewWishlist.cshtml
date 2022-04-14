@@ -1,0 +1,52 @@
+﻿@model IList<DataModelLayer.ProductWishlist>
+@{
+    ViewBag.Title = "ViewWishlist";
+    Layout = "~/Views/Users/_Layout.cshtml";
+}
+
+<h2>ViewWishlist</h2>
+@if (!Model.Any())
+{
+    <h3>No items in the wishlist</h3>
+}
+else
+{
+    <table class="table table-bordered">
+
+        <tr>
+            <th>Product Image</th>
+            <th>Product Name</th>
+            <th>Product Description</th>
+            <th>Remove Product</th>
+            <th>Add to cart</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Url.Content(item.Product.ProductImage)" />
+                </td>
+                <td>
+                    @item.Product.ProductName
+                </td>
+                <td>
+                    @item.Product.ProductDescription
+                </td>
+                <td>
+                    <a class="bi bi-trash" href="@Url.Action("RemoveItemById","Wishlist",item.Product)">Remove</a>
+                </td>
+                <td>
+                    <a href="@Url.Action("AddToCart", "Cart", item.Product)" id="cart"
+                       class="glyphicon glyphicon-shopping-cart"
+                       style="margin:30px; color:blue;">
+                        <i class="bi bi-cart-plus"></i> @item.Product.ProductPrice.ToString("c")
+                    </a>
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}
+
+

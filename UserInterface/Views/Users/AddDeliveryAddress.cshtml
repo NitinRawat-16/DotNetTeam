@@ -1,0 +1,44 @@
+﻿@model DataModelLayer.DeliveryAddress
+@{
+    ViewBag.Title = "AddDeliveryAddress";
+    Layout = "~/Views/Users/_Layout.cshtml";
+}
+
+<h2>Add Delivery Address</h2>
+<hr />
+
+@using (Html.BeginForm("AddAddress", "Users"))
+{
+    <div class="form-group">
+        <label class="col-md-2 control-label">Name</label>
+        @Html.TextBoxFor(da => da.Name, new { @class = "form-control" })
+
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Delivery Address</label>
+        @Html.TextBoxFor(da => da.Address, new { @class = "form-control" })
+
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">City</label>
+        @Html.TextBoxFor(da => da.City, new { @class = "form-control" })
+
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">State</label>
+        @Html.TextBoxFor(da => da.State, new { @class = "form-control" })
+
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Mobile No.</label>
+        @Html.TextBoxFor(da => da.PhoneNumber, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m => m.UserId)
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Save Address" />
+        </div>
+    </div>
+    <br />
+
+}

@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "ProductAlert";
+    Layout = "~/Views/Admins/_LayoutAdmin.cshtml";
+}
+
+<h2>ProductAlert</h2>
+<div>
+    <table id="productTable" class="table table-bordered table-hover">
+        <thead>
+
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>S</th>
+                <th>M</th>
+                <th>L</th>
+                <th>XL</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.ProductId</td>
+                    <td>@product.ProductName</td>
+                    <td>@product.ProductCategory.ProductCategoryType</td>
+                    <td>@product.ProductPrice</td>
+                    <td>@product.ProductSize.S</td>
+                    <td>@product.ProductSize.M</td>
+                    <td>@product.ProductSize.L</td>
+                    <td>@product.ProductSize.Xl</td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+</div>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#productTable').DataTable()
+        });
+    </script>
+}
+
+
+

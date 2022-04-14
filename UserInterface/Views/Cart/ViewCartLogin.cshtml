@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DataModelLayer.Cart>
+@{
+    ViewBag.Title = "ViewCart";
+    Layout = "~/Views/Users/_Layout.cshtml";
+}
+<h2>Cart</h2>
+<hr />
+
+<table class="table  table-bordered  table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(m => m.Product.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.Product.ProductPrice)
+        </th>
+        <th>
+           @Html.DisplayNameFor(m => m.Quantity)
+        </th>
+        <th>
+            Delete Product
+        </th>
+    </tr>
+    @{ 
+        int sum = 0;
+
+
+        foreach (var product in Model)
+        {
+           
+            sum += product.Product.ProductPrice * product.Quantity;
+            <tr>
+                <td>@Html.DisplayFor(m => product.Product.ProductName)</td>
+                <td>Rs. @product.Product.ProductPrice/-</td>
+                <td>@product.Quantity</td>
+                <td><a href="@Url.Action("Delete","Cart",product.Product)"><i class="bi bi-trash"></i>Remove</a></td>
+            </tr>
+        }
+    }
+<tr>
+    <td>Total</td>
+    <td>Rs. @sum/-</td>
+    <td>
+        <a href="@Url.Action("SelectAddress","Users")" type="button" class="btn btn-primary">Buy Now</a>
+    </td>
+    <td>
+        <a href="@Url.Action("ShowProducts","Users")" type="button" class="btn btn-primary">Continue Shopping</a>
+    </td>
+</tr>
+</table>
+
+<style>
+    .table {
+        margin-top: 30px;
+    }
+</style>
+
+

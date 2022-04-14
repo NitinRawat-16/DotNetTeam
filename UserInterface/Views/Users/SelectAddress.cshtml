@@ -1,0 +1,30 @@
+﻿@model UserInterface.ViewModel.DeliveryAddressesViewModel
+@{
+    ViewBag.Title = "SelectAddress";
+    Layout = "~/Views/Users/_Layout.cshtml";
+}
+
+<h2>Select Address</h2>
+<hr />
+
+@using (Html.BeginForm("BuyNow", "Users"))
+{
+<div class="form-group">
+    <label class="col-md-2 control-label">Name</label>
+    @Html.TextBoxFor(d => d.Name, new {@class = "form-control"})
+</div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Select Address</label>
+        @Html.DropDownListFor(d => d.DeliveryAddressSelect,
+       new SelectList(Model.DeliveryAddress, "Id", "Address"), "",
+       new { @class = "form-control" })
+    </div>
+        <button type="submit" id="BuyNow" class="btn btn-primary">Buy Now</button>
+
+        @*<a href="@Url.Action("BuyNow","Users", Model.DeliveryAddressSelect, Model.Name)" type="button" class="btn btn-primary">Buy Now</a>*@
+    
+        <a href="@Url.Action("AddAddress","Users")" type="button" class="btn btn-primary">Add Address</a>
+    
+
+
+}

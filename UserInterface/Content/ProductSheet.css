@@ -1,0 +1,94 @@
+﻿body {
+}
+
+.containerbox {
+    width: 100%;
+    margin: auto;
+    background-color: linen;
+    padding: 30px;
+    margin-top: 40px;
+    border-radius: 8px;
+    border: solid 1px purple;
+}
+
+.Box {
+    display: inline-block;
+}
+
+#size {
+    display: flex;
+}
+
+.sub-size {
+    margin-right: 20px;
+}
+
+#second-item {
+    float: right;
+}
+
+.label-class {
+    display: inline;
+    font-size: medium;
+}
+
+.submit-class {
+}
+
+#h2 {
+    padding-bottom: 5px;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-color: purple;
+    font-family: 'Nirmala UI';
+    color: black;
+    margin-top: 0;
+}
+
+.form-control {
+    border: solid 1px purple;
+}
+
+.error {
+    color: red;
+}
+
+.container1 {
+    background-color: aliceblue;
+}
+
+.display {
+    background-color: ghostwhite;
+    border-radius: 10px;
+}
+
+.caption {
+    background-color: azure;
+    padding: 2px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+    .caption span {
+        padding: 2px;
+        border-radius: 2px;
+    }
+
+    .caption .Name {
+        font-weight: 700;
+    }
+
+.box {
+    margin-bottom: 10px;
+}
+
+.button {
+    padding: 2px;
+    border-radius: 2px;
+    color: black;
+    text-decoration: none;
+}
+
+.btn-orange {
+    background-color: #ff8c00;
+    color: black;
+}

@@ -1,0 +1,42 @@
+﻿@model UserInterface.ViewModel.DeliveryAddressesViewModel
+@{
+    ViewBag.Title = "BuyNow";
+    Layout = "~/Views/Users/_Layout.cshtml";
+}
+
+<h2>Order Summary</h2>
+@using (Html.BeginForm("OrderConfirm", "Users"))
+{
+<table class="table  table-bordered  table-hover">
+    <tr>
+        <th>Product Name</th>
+        <th>Product Prize</th>
+        <th>Product Quantity</th>
+    </tr>
+    @{
+        int sum = 0;
+        var Quantity = 0;
+
+
+        foreach (var product in Model.Carts)
+        {
+
+            sum += product.Product.ProductPrice * product.Quantity;
+            Quantity += product.Quantity;
+            <tr>
+                <td>@Html.DisplayFor(m => product.Product.ProductName)</td>
+                <td>Rs. @product.Product.ProductPrice/-</td>
+                <td>@product.Quantity</td>
+            </tr>
+        }
+    }
+    @Html.HiddenFor(m => m.Name)
+    @Html.HiddenFor(m => m.DeliveryAddressSelect)
+
+    <tr>
+        <td><button type="submit" class="btn btn-primary">Buy Now</button></td>
+        <td><b>Total Amount: Rs. @sum/-</b></td>
+        <td><b>Total Quantity: @Quantity</b></td>
+    </tr>
+</table>
+        }
