@@ -29,7 +29,7 @@ namespace UserInterface.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = "PRoduct added to wishlist";
+                    ViewBag.Message = "Product added to wishlist";
 
                     return RedirectToAction("ShowProducts", "Users");
                 }
@@ -68,5 +68,12 @@ namespace UserInterface.Controllers
             _Db.RemoveItemById(product, User.Identity.Name);
             return RedirectToAction("ViewWishlist");
         }
+
+        public ActionResult AddToCart(Product product)
+        {
+            _Db.RemoveItemById(product, User.Identity.Name);
+            return RedirectToAction("AddToCart","Cart",product);
+        }
+
     }
 }
