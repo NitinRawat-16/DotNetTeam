@@ -74,7 +74,7 @@ namespace UserInterface.Controllers
         {
             var userName = User.Identity.Name;
             _userBs.AddAddress(deliveryAddress, userName);
-            return RedirectToAction("BuyNow");
+            return RedirectToAction("SelectAddress");
         }
 
         public ActionResult Orders()
