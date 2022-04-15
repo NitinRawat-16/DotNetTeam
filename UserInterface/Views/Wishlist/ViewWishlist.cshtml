@@ -42,13 +42,13 @@
                     </div>
                     <div>
 
-                        <span class="btn btn-lg btn-block button btn-orange">
+                        <span class="btn btn-lg btn-block button ">
                             @if (items.Product.ProductAvailability != 0)
                             {
                                 <a href="@Url.Action("AddToCart", "Wishlist", items.Product)" id="cart"
                                    class="glyphicon glyphicon-shopping-cart"
                                    style="margin:30px; color:Black;">
-                                    <i class="bi bi-cart-plus"></i> @items.Product.ProductPrice.ToString("c")
+                                    <i class="bi bi-cart-plus"></i>Rs.@items.Product.ProductPrice.ToString()/-
                                 </a>
                             }
                             else
