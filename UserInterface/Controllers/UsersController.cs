@@ -84,12 +84,13 @@ namespace UserInterface.Controllers
         public ActionResult Orders()
         {
             var userName = User.Identity.Name;
-            OrderTableViewModel data = new OrderTableViewModel() {
+            OrderTableViewModel data = new OrderTableViewModel()
+            {
                 ProductPending = _userBs.GetPendingOrder(userName),
                 ProductConfirm = _userBs.GetConfirmedOrder(userName),
                 ProductCancel = _userBs.GetcancelOrder(userName),
                 ProductSuccessDelivered = _userBs.GetDeliveredOrder(userName)
-        };
+            };
             return View(data);
         }
 
