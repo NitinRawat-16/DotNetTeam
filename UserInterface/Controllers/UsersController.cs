@@ -39,11 +39,11 @@ namespace UserInterface.Controllers
             return View();
         }
 
-        //public ActionResult BuyNow(DeliveryAddressesViewModel deliveryAddressesViewModel)
-        //{
-        //    deliveryAddressesViewModel.Carts=_userBs.GetCartItemsByUser(User.Identity.Name);
-        //    return View(deliveryAddressesViewModel);
-        //}
+        public  ActionResult BuyNows(DeliveryAddressesViewModel deliveryAddressesViewModel)
+        {
+            deliveryAddressesViewModel.Carts = _userBs.GetCartItemsByUser(User.Identity.Name);
+            return View(deliveryAddressesViewModel);
+        }
 
 
         public ActionResult BuyNow(Product product)

@@ -7,7 +7,7 @@
 <h2>Select Address</h2>
 <hr />
 
-@using (Html.BeginForm("BuyNow", "Users"))
+@using (Html.BeginForm("BuyNows", "Users"))
 {
 <div class="form-group">
     <label class="col-md-2 control-label">Name</label>
@@ -19,7 +19,7 @@
        new SelectList(Model.DeliveryAddress, "Id", "Address"), "",
        new { @class = "form-control" })
     </div>
-        <button type="submit" id="BuyNow" class="btn btn-primary">Buy Now</button>
+        <button type="submit" id="BuyNows" class="btn btn-primary">Buy Now</button>
 
         @*<a href="@Url.Action("BuyNow","Users", Model.DeliveryAddressSelect, Model.Name)" type="button" class="btn btn-primary">Buy Now</a>*@
     

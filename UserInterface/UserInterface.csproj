@@ -539,7 +539,7 @@
     <Content Include="Views\Users\_Layout.cshtml" />
     <Content Include="Views\Users\AddDeliveryAddress.cshtml" />
     <Content Include="Views\Users\Wishlist.cshtml" />
-    <Content Include="Views\Users\BuyNow.cshtml" />
+    <Content Include="Views\Users\BuyNows.cshtml" />
     <Content Include="Views\Users\Orders.cshtml" />
     <Content Include="Views\Users\SelectAddress.cshtml" />
     <Content Include="Views\Wishlist\ViewWishlist.cshtml" />
