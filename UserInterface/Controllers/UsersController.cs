@@ -5,6 +5,7 @@ using BusinessLogicLayer.Users;
 using UserInterface.ViewModel;
 using System.Security.Claims;
 using System.Web;
+using BusinessLogicLayer;
 
 namespace UserInterface.Controllers
 {
@@ -12,8 +13,10 @@ namespace UserInterface.Controllers
     public class UsersController : Controller
     {
         private readonly UserBs _userBs;
+        private CartBs cartBs;
         public UsersController()
         {
+            cartBs = new CartBs();
             _userBs = new UserBs();
         }
         // GET: User
@@ -36,12 +39,30 @@ namespace UserInterface.Controllers
             return View();
         }
 
-        public ActionResult BuyNow(DeliveryAddressesViewModel deliveryAddressesViewModel)
-        {
-            deliveryAddressesViewModel.Carts=_userBs.GetCartItemsByUser(User.Identity.Name);
-            return View(deliveryAddressesViewModel);
-        }
+        //public ActionResult BuyNow(DeliveryAddressesViewModel deliveryAddressesViewModel)
+        //{
+        //    deliveryAddressesViewModel.Carts=_userBs.GetCartItemsByUser(User.Identity.Name);
+        //    return View(deliveryAddressesViewModel);
+        //}
 
+
+        public ActionResult BuyNow(Product product)
+        {
+
+                List<Product> products = new List<Product>();
+                products.Add(product);
+                var userId = User.Identity.Name;
+                cartBs.MigrateToDb(products, userId);
+
+                var count = cartBs.GetCartCountByUserId(userId);
+                HttpCookie counts = new HttpCookie("Count", count.ToString());
+                Response.Cookies.Add(counts);
+
+            
+           
+                return RedirectToAction("ViewCart", "Cart");
+
+        }
         public void AddToWishlist(){}
 
         public ActionResult AddDeliveryAddress()
@@ -118,6 +139,8 @@ namespace UserInterface.Controllers
 
 
         }
+
+     
 
 
     }

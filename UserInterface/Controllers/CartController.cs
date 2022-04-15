@@ -168,7 +168,7 @@ namespace UserInterface.Controllers
             return RedirectToAction("ViewCart");
         }
         
-        public ActionResult BuyNow()
+        public ActionResult BuyNow(Product product)
         {
             if(User.Identity.IsAuthenticated)
             {
@@ -176,7 +176,35 @@ namespace UserInterface.Controllers
             }
             else
             {
-                return RedirectToAction("Login", "Account");
+                int a;
+                int.TryParse(Request.Cookies["count"].Value, out a);
+
+                HttpCookie ProductList = new HttpCookie("ProductIds");
+                System.Collections.Specialized.NameValueCollection product1 = new System.Collections.Specialized.NameValueCollection();
+
+                for (int i = 0; i < a; i++)
+                {
+                    var productKey = "items_" + i;
+                    var productValue = Request.Cookies["ProductIds"].Values[i];
+
+                    product1.Add(productKey, productValue);
+
+                }
+
+                var name = "items_" + a;
+
+                product1.Add(name, product.ProductId.ToString());
+                a++;
+
+                // var previousData= Request.Cookies["ProductIds"].Values[1];
+
+                ProductList.Values.Add(product1);
+
+                Response.Cookies.Add(ProductList);
+                HttpCookie count = new HttpCookie("Count", a.ToString());
+                Response.Cookies.Add(count);
+                return RedirectToAction("ViewCart");
+
             }
         }
     }
