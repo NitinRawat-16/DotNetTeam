@@ -41,9 +41,20 @@
     <td>Total</td>
     <td>Rs. @sum/-</td>
     <td>
-        <a href="@Url.Action("SelectAddress","Users")" type="button" class="btn btn-primary">Buy Now</a>
+
+        @if (Request.Cookies["Count"].Value == "0")
+        {
+            <a href="@Url.Action("SelectAddress", "Users")" type="button" class="btn btn-primary disabled">Buy Now</a>
+        }
+        else
+        {
+            <a href="@Url.Action("SelectAddress", "Users")" type="button" class="btn btn-primary">Buy Now</a>
+
+        }
+
     </td>
     <td>
+
         <a href="@Url.Action("ShowProducts","Users")" type="button" class="btn btn-primary">Continue Shopping</a>
     </td>
 </tr>
