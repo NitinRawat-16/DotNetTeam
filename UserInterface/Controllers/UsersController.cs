@@ -13,12 +13,13 @@ namespace UserInterface.Controllers
     public class UsersController : Controller
     {
         private readonly UserBs _userBs;
-        private CartBs cartBs;
+        private readonly CartBs cartBs;
         public UsersController()
         {
             cartBs = new CartBs();
             _userBs = new UserBs();
         }
+
         // GET: User
         public ActionResult Index()
         {
@@ -48,7 +49,6 @@ namespace UserInterface.Controllers
 
         public ActionResult BuyNow(Product product)
         {
-
                 List<Product> products = new List<Product>();
                 products.Add(product);
                 var userId = User.Identity.Name;
@@ -57,9 +57,6 @@ namespace UserInterface.Controllers
                 var count = cartBs.GetCartCountByUserId(userId);
                 HttpCookie counts = new HttpCookie("Count", count.ToString());
                 Response.Cookies.Add(counts);
-
-            
-           
                 return RedirectToAction("ViewCart", "Cart");
 
         }
@@ -86,7 +83,6 @@ namespace UserInterface.Controllers
                 ProductCancel = _userBs.GetcancelOrder(userName),
                 ProductSuccessDelivered = _userBs.GetDeliveredOrder(userName)
         };
-
             return View(data);
         }
 
@@ -129,19 +125,12 @@ namespace UserInterface.Controllers
                     orderConfirmeds.Add(order);
                 }
             }
-                _userBs.OrderConfirmedByList(orderConfirmeds);
+            _userBs.OrderConfirmedByList(orderConfirmeds);
             _userBs.RemoveFromCart(CurrentUser);
 
             HttpCookie count = new HttpCookie("Count", "0");
             Response.Cookies.Add(count);
-
             return RedirectToAction("Orders");
-
-
         }
-
-     
-
-
     }
 }

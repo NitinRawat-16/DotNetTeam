@@ -7,7 +7,7 @@
 <hr />
 <h2>Pending Orders</h2>
 <div>
-    <table id="orderTable" class="table table-bordered table-hover">
+    <table id="orderTable1" class="table table-bordered table-hover">
         <thead>
 
             <tr>
@@ -42,83 +42,9 @@
 
 <hr />
 <br />
-<h2>Confirmed Orders</h2>
+<h2>Delivered Orders</h2>
 <div>
-    <table id="orderTable" class="table table-bordered table-hover">
-        <thead>
-
-            <tr>
-                <th>Product Name</th>
-                <th>Product Description</th>
-                <th>Product Price</th>
-                <th>Order Date</th>
-                <th>Custmer Address</th>
-                <th>Order Size</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var order in Model.ProductConfirm)
-            {
-                <tr>
-                    <td>@order.Product.ProductName</td>
-                    <td>@order.Product.ProductDescription</td>
-                    <td>@order.Product.ProductPrice</td>
-                    <td>@order.OrderDetail.OrderDate.Date</td>
-                    <td>@order.OrderDetail.DeliveryAddress</td>
-                    <td>@order.OrderDetail.Size</td>
-
-
-
-                </tr>
-
-            }
-        </tbody>
-
-    </table>
-</div>
-
-<hr />
-<br />
-<h2>Canceled Orders</h2>
-<div>
-    <table id="orderTable" class="table table-bordered table-hover">
-        <thead>
-
-            <tr>
-                <th>Product Name</th>
-                <th>Product Description</th>
-                <th>Product Price</th>
-                <th>Order Date</th>
-                <th>Custmer Address</th>
-                <th>Order Size</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var order in Model.ProductCancel)
-            {
-                <tr>
-                    <td>@order.Product.ProductName</td>
-                    <td>@order.Product.ProductDescription</td>
-                    <td>@order.Product.ProductPrice</td>
-                    <td>@order.OrderDate.Date</td>
-                    <td>@order.CustomerAddress</td>
-                    <td>@order.Size</td>
-
-
-
-                </tr>
-
-            }
-        </tbody>
-
-    </table>
-</div>
-
-<hr />
-<br />
-<h2>Successful Orders</h2>
-<div>
-    <table id="orderTable" class="table table-bordered table-hover">
+    <table id="orderTable4" class="table table-bordered table-hover">
         <thead>
 
             <tr>
@@ -137,7 +63,7 @@
                     <td>@order.Product.ProductName</td>
                     <td>@order.Product.ProductDescription</td>
                     <td>@order.Product.ProductPrice</td>
-                    <td>@order.OrderDetail.OrderDate.</td>
+                    <td>@order.OrderDetail.OrderDate.Date.ToString("dd-MM-yyyy")</td>
                     <td>@order.OrderDetail.DeliveryAddress</td>
                     <td>@order.OrderDetail.Size</td>
 
@@ -150,12 +76,91 @@
 
     </table>
 </div>
+
+<hr />
+<br />
+<h2>Confirmed Orders</h2>
+<div>
+    <table id="orderTable2" class="table table-bordered table-hover">
+        <thead>
+
+            <tr>
+                <th>Product Name</th>
+                <th>Product Description</th>
+                <th>Product Price</th>
+                <th>Order Date</th>
+                <th>Custmer Address</th>
+                <th>Order Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.ProductConfirm)
+            {
+                <tr>
+                    <td>@order.Product.ProductName</td>
+                    <td>@order.Product.ProductDescription</td>
+                    <td>@order.Product.ProductPrice</td>
+                    <td>@order.OrderDetail.OrderDate.Date.ToString("dd-MM-yyyy")</td>
+                    <td>@order.OrderDetail.DeliveryAddress</td>
+                    <td>@order.OrderDetail.Size</td>
+
+
+
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+</div>
+
+<hr />
+<br />
+<h2>Canceled Orders</h2>
+<div>
+    <table id="orderTable3" class="table table-bordered table-hover">
+        <thead>
+
+            <tr>
+                <th>Product Name</th>
+                <th>Product Description</th>
+                <th>Product Price</th>
+                <th>Order Date</th>
+                <th>Custmer Address</th>
+                <th>Order Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.ProductCancel)
+            {
+                <tr>
+                    <td>@order.Product.ProductName</td>
+                    <td>@order.Product.ProductDescription</td>
+                    <td>@order.Product.ProductPrice</td>
+                    <td>@order.OrderDate.Date.ToString("dd-MM-yyyy")</td>
+                    <td>@order.CustomerAddress</td>
+                    <td>@order.Size</td>
+
+
+
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+</div>
+
+
 @section scripts
 {
     <script>
         $(document).ready(function () {
 
-            $('#orderTable').DataTable()
+            $('#orderTable1 ').DataTable()
+            $('#orderTable2 ').DataTable()
+            $('#orderTable3 ').DataTable()
+            $('#orderTable4 ').DataTable()
         });
     </script>
 }

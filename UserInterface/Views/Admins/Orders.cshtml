@@ -36,7 +36,7 @@
                 <td>@order.ProductCategoryType</td>
                 <td>@order.Size</td>
                 <td>@order.Available</td>
-                <td>@order.OrderDate</td>
+                <td>@order.OrderDate.Date.ToString("dd-MMM-yyyy")</td>
                 <td>
                     <a href="@Url.Action("OrderConfirm", "Admins",order)">Conifrm</a>
                     <a href="@Url.Action("OrderCancel", "Admins",order)" >Cancel</a>
