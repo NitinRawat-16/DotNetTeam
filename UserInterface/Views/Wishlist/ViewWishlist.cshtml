@@ -3,65 +3,68 @@
     ViewBag.Title = "ViewWishlist";
     Layout = "~/Views/Users/_Layout.cshtml";
 }
+<div class="col-lg-12">
+    <h2>Wishlist</h2>
+    <hr />
+    @if (!Model.Any())
+    {
+        <h3>No items in the wishlist</h3>
+    }
+    else
+    {
+        <link href="~/Content/ProductSheet.css" rel="stylesheet" />
+        <hr />
 
-<h2>Wishlist</h2>
-<hr />
-@if (!Model.Any())
-{
-    <h3>No items in the wishlist</h3>
-}
-else
-{
-    <table id="Wishlist" class="table table-bordered">
-        <thead>
 
-        <tr>
-            <th>Product Image</th>
-            <th>Product Name</th>
-            <th>Product Description</th>
-            <th>Remove Product</th>
-            <th>Add to cart</th>
-        </tr>
-        </thead>
-        <tbody>
 
-        @foreach (var item in Model)
+        foreach (var items in Model)
         {
-            <tr>
-                <td>
-                    <img src="@Url.Content(item.Product.ProductImage)" class="img-thumbnail" style="width:200px; height:200px;" />
-                </td>
-                <td>
-                    @item.Product.ProductName
-                </td>
-                <td>
-                    @item.Product.ProductDescription
-                </td>
-                <td>
-                    <a style="margin-top:40px; margin-left:25px;" class="btn btn-primary" href="@Url.Action("RemoveItemById","Wishlist",item.Product)">Remove</a>
-                </td>
-                <td>
-                    <a href="@Url.Action("AddToCart", "Cart", item.Product)" id="cart"
-                       class="glyphicon glyphicon-shopping-cart"
-                       style="margin:30px; color:Black;">
-                        <i class="bi bi-cart-plus"></i> @item.Product.ProductPrice.ToString("c")
-                    </a>
-                </td>
+            <div class="box">
 
-            </tr>
+                <div class="col-md-3 thumbnail display">
+                    <img style="width:200px; height:200px;" src="@Url.Content(items.Product.ProductImage)" class="img-rounded" alt="Waterfall" />
+
+
+                    <div id="item">
+                        <div class="caption Name">
+                            <h4> <span class="caption Name"> @items.Product.ProductName </span></h4>
+                        </div>
+
+                        <div class="caption">
+                            <span>@items.Product.ProductDescription </span>
+                        </div>
+
+                        <div class="caption">
+                            <span class="btn-danger">Rs. @items.Product.ProductPrice/-</span>&nbsp;&nbsp;&nbsp;
+
+
+                        </div>
+                    </div>
+                    <div>
+
+                        <span class="btn btn-lg btn-block button btn-orange">
+                            @if (items.Product.ProductAvailability != 0)
+                            {
+                                <a href="@Url.Action("AddToCart", "Wishlist", items.Product)" id="cart"
+                                   class="glyphicon glyphicon-shopping-cart"
+                                   style="margin:30px; color:Black;">
+                                    <i class="bi bi-cart-plus"></i> @items.Product.ProductPrice.ToString("c")
+                                </a>
+                            }
+                            else
+                            {
+                                <span class="btn btn-lg btn-block button">Out Of Stock!</span>
+
+                            }
+                            <br />
+                            <a style="margin-top:40px; margin-left:25px;" href="@Url.Action("RemoveItemById","Wishlist",items.Product)">Remove</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
         }
-        </tbody>
 
-    </table>
-}
 
-@section scripts
-{
-    <script>
-        $(document).ready(function () {
-            $('#Wishlist').DataTable()
-           
-        });
-    </script>
-}
 
+    }
+</div>

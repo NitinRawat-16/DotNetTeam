@@ -91,7 +91,7 @@ namespace UserInterface.Controllers
 
                 if (productViewModel.imageUrl != null)
                 {
-                    var productInDb = product.GetById(productViewModel.product.ProductSizeId);
+                    var productInDb = product.GetById(productViewModel.product.ProductId);
                     string fileName = Path.GetFileNameWithoutExtension(productViewModel.imageUrl.FileName);
                     string extension = Path.GetExtension(productViewModel.imageUrl.FileName);
                     fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
