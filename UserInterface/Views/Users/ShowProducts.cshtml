@@ -4,13 +4,15 @@
     ViewBag.Title = "ShowProducts";
     Layout = "~/Views/Users/_Layout.cshtml";
 }
+
+
 <link href="~/Content/ProductSheet.css" rel="stylesheet" />
 <h2>Products</h2>
 <hr />
 
-<div class="filters">
+@*<div class="filters">
 
-</div>
+</div>*@
 
 @foreach (var items in Model.Products)
 {
@@ -110,5 +112,6 @@
         </div>
     </div>
 }
+
 
 

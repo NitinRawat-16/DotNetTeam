@@ -57,10 +57,10 @@ namespace UserInterface.Controllers
                 var count = cartBs.GetCartCountByUserId(userId);
                 HttpCookie counts = new HttpCookie("Count", count.ToString());
                 Response.Cookies.Add(counts);
+
                 return RedirectToAction("ViewCart", "Cart");
 
         }
-        public void AddToWishlist(){}
 
         public ActionResult AddDeliveryAddress()
         {
