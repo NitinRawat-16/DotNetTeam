@@ -8,13 +8,14 @@ using DataModelLayer;
 
 namespace UserInterface.Controllers
 {
+    [Authorize(Roles = "User")]
     public class WishlistController : Controller
     {
         // GET: Wishlist
 
         private readonly WishlistBs _Db;
-
         public WishlistController() => _Db = new WishlistBs();
+
         public ActionResult AddToWishList(Product product)
         {
             if (User.Identity.IsAuthenticated)
@@ -43,8 +44,6 @@ namespace UserInterface.Controllers
 
 
         //View Wishlist
-
-
         public ActionResult ViewWishlist()
         {
             var wishlist = _Db.GetAllById(User.Identity.Name);
@@ -62,7 +61,6 @@ namespace UserInterface.Controllers
 
 
         //Remove Item from wishlist
-
         public ActionResult RemoveItemById(Product product)
         {
             _Db.RemoveItemById(product, User.Identity.Name);

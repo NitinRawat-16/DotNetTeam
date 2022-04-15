@@ -26,6 +26,7 @@ namespace UserInterface.Controllers
             return View();
         }
 
+        // Get All Products
         public ActionResult ShowProducts()
         {
             var products = new ViewProductsViewModel
@@ -35,18 +36,21 @@ namespace UserInterface.Controllers
             return View(products);
         }
 
+        // Show Wishlist
         public ActionResult Wishlist()
         {
             return View();
         }
 
+
+        // Buy Now When Items Added In Cart
         public  ActionResult BuyNows(DeliveryAddressesViewModel deliveryAddressesViewModel)
         {
             deliveryAddressesViewModel.Carts = _userBs.GetCartItemsByUser(User.Identity.Name);
             return View(deliveryAddressesViewModel);
         }
-
-
+        
+        // Direct Buy Now from Products View
         public ActionResult BuyNow(Product product)
         {
                 List<Product> products = new List<Product>();
@@ -62,11 +66,13 @@ namespace UserInterface.Controllers
 
         }
 
+        // Show Add Address Form
         public ActionResult AddDeliveryAddress()
         {
             return View();
         }
 
+        // Add New Address In Customer Address Table
         public ActionResult AddAddress(DeliveryAddress deliveryAddress)
         {
             var userName = User.Identity.Name;
@@ -74,6 +80,7 @@ namespace UserInterface.Controllers
             return RedirectToAction("SelectAddress");
         }
 
+        // View All Orders
         public ActionResult Orders()
         {
             var userName = User.Identity.Name;
@@ -86,6 +93,7 @@ namespace UserInterface.Controllers
             return View(data);
         }
 
+        // Select Address Form Saved Addresses
         public ActionResult SelectAddress()
         {
             var user = User.Identity.Name;
@@ -97,6 +105,7 @@ namespace UserInterface.Controllers
             return View(viewModel);
         }
 
+        // After Adding Products In Cart Confirm Order
         public ActionResult OrderConfirm(DeliveryAddressesViewModel deliveryAddressesViewModel)
         {
             var CurrentUser=User.Identity.Name;

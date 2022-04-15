@@ -13,18 +13,21 @@ namespace DataLayer.Users
             _dbContext = new PortalEntities();
         }
 
+        // Return All Product To Business Layer.
         public IEnumerable<Product> GetAllProduct()
         {
             var products = _dbContext.Products;
             return products;
         }
 
+        // Return Cart Items Of User.
         public IEnumerable<Cart> GetCartItemsByUser(string userName)
         {
             var user = _dbContext.AspNetUsers.Where(u => u.UserName == userName).First();
             return _dbContext.Carts.Include(c => c.Product).Include(u => u.AspNetUser).Where(u => u.UserId == user.Id).ToList();
         }
 
+        // Add New Address InTo Address Table.
         public void AddAddress(DeliveryAddress deliveryAddress, string userName)
         {
             var user = _dbContext.AspNetUsers.Where(u => u.UserName == userName).First();
@@ -41,16 +44,21 @@ namespace DataLayer.Users
             _dbContext.SaveChanges();
         }
 
+        // Return Save Addresses Of User.
         public IList<DeliveryAddress> GetDeliveryAddresses(string userName)
         {
             var user = _dbContext.AspNetUsers.Where(u => u.UserName == userName).First();
             var deliveryAddress = _dbContext.DeliveryAddresses.Where(u => u.UserId == user.Id).ToList();
             return deliveryAddress;
         }
+
+        // Return Particular User Info.
         public AspNetUser GetUserById(string userName)
         {
             return _dbContext.AspNetUsers.Where(_u => _u.UserName == userName).First();
         }
+
+        // Return Particular Delivery Address. 
         public DeliveryAddress GetAddressById(int id)
         {
                 return _dbContext.DeliveryAddresses.Where(_u => _u.Id == id).First();
@@ -66,6 +74,7 @@ namespace DataLayer.Users
             _dbContext.SaveChanges();
         }
 
+        // Return Confirmed Orders.
         public IEnumerable<Order> GetConfirmedOrder(string userName)
         {
             var users=_dbContext.AspNetUsers.Where(u=>u.UserName==userName).First();
@@ -75,6 +84,7 @@ namespace DataLayer.Users
                 .Where(o => o.UserId == users.Id && o.OrderDetail.OrderDeliveryDate==null).ToList();
         }
 
+        // Return Delivered Orders.
         public IEnumerable<Order> GetDeliveredOrder(string userName)
         {
             var users = _dbContext.AspNetUsers.Where(u => u.UserName == userName).First();
@@ -86,31 +96,30 @@ namespace DataLayer.Users
             return data.Where(o => o.OrderDetail.OrderDeliveryDate!=null);
         }
 
+        // Return Pending Orders.
         public IEnumerable<OrderConfirmed> GetPendingOrder(string userName)
         {
             var users = _dbContext.AspNetUsers.Where(u => u.UserName == userName).First();
             return _dbContext.OrderConfirmeds.Include(o => o.Product).Where(o => o.CustomerId == users.Id).ToList();
         }
 
+        // Return Canceled Orders.
         public IEnumerable<OrderCanceled> GetcancelOrder(string userName)
         {
             var users = _dbContext.AspNetUsers.Where(u => u.UserName == userName).First();
             return _dbContext.OrderCanceleds.Include(o => o.Product).Where(o => o.CustomerId == users.Id).ToList();
         }
 
-
+        // Remove Items From Cart After Buy Now.
         public void RemoveFromCart(string userName)
         {
             var users=_dbContext.AspNetUsers.Where(u => u.UserName == userName).First();
             var cartItem=_dbContext.Carts.Where(c=>c.UserId==users.Id).ToList();
-            foreach(var cart in cartItem)
-            {
 
-                _dbContext.Carts.Remove(cart);
-            }
+            foreach(var item in cartItem)
+                _dbContext.Carts.Remove(item);
+            
             _dbContext.SaveChanges();
         }
-
-
     }
 }
