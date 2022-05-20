@@ -5,32 +5,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Payments Index</h2>
+<h2>Payments Details</h2>
 
 @using (Html.BeginForm("CreateOrder", "Payments", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    <div class="row">
+    <div class="form-group">
         <label for="name">Name</label>
         @Html.TextBoxFor(x => x.CName, new { @class = "form-control" })
     </div>
 
-    <div class="row">
+    <div class="form-group">
         <label for="email">Email</label>
         @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
     </div>
 
-    <div class="row">
+    <div class="form-group">
         <label for="contactNumber">Contact Number</label>
         @Html.TextBoxFor(x => x.ContactNumber, new { @class = "form-control" })
     </div>
 
-    <div class="row">
+    <div class="form-group">
         <label for="address">Address</label>
         @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
     </div>
 
-    <div class="row">
+    <div class="form-group">
         <label for="amount">Amount</label>
         @Html.TextBoxFor(x => x.Amount, new { @class = "form-control" })
     </div>

@@ -4,27 +4,30 @@
     Layout = "~/Views/Users/_Layout.cshtml";
 }
 
-<h2>Select Address</h2>
+<h2>Select Delivery Address</h2>
 <hr />
 
 @using (Html.BeginForm("BuyNows", "Users"))
 {
-<div class="form-group">
-    <label class="col-md-2 control-label">Name</label>
-    @Html.TextBoxFor(d => d.Name, new {@class = "form-control"})
-</div>
     <div class="form-group">
-        <label class="col-md-2 control-label">Select Address</label>
-        @Html.DropDownListFor(d => d.DeliveryAddressSelect,
-       new SelectList(Model.DeliveryAddress, "Id", "Address"), "",
-       new { @class = "form-control" })
+        <label class="col-md-2 control-label">Name</label>
+        @Html.TextBoxFor(d => d.Name, new { @class = "form-control" })
     </div>
+
+    <div class="form-group">
+        <label class="col-lg-2 control-label">Select Address</label>
+        @Html.DropDownListFor(d => d.DeliveryAddressSelect,
+        new SelectList(Model.DeliveryAddress, "Id", "Address"), "Select Address",
+        new { @class = "form-control" })
+    </div>
+    <div class="form-group" sty>
         <button type="submit" id="BuyNows" class="btn btn-primary">Buy Now</button>
 
-        @*<a href="@Url.Action("BuyNow","Users", Model.DeliveryAddressSelect, Model.Name)" type="button" class="btn btn-primary">Buy Now</a>*@
-    
-        <a href="@Url.Action("AddDeliveryAddress","Users")" type="button" class="btn btn-primary">Add Address</a>
-    
+    @*<a href="@Url.Action("BuyNow","Users", Model.DeliveryAddressSelect, Model.Name)" type="button" class="btn btn-primary">Buy Now</a>*@
+
+    <a href="@Url.Action("AddDeliveryAddress","Users")" type="button" class="btn btn-primary">Add Address</a>
+    </div>
+
 
 
 }
