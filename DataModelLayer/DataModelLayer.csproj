@@ -104,6 +104,8 @@
     <Compile Include="OrderDetail.cs">
       <DependentUpon>ShoppingPortalEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="PaymentOrderModel.cs" />
+    <Compile Include="PaymentInitial.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>ShoppingPortalEntities.tt</DependentUpon>
     </Compile>
